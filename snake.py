@@ -21,5 +21,5 @@ def ligne():
         canvas.create_rectangle(x,y,w,h,bord,color)
         x+=20
         w+=20
-print(x)
+
 fenetre.mainloop()
