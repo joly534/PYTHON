@@ -1,12 +1,17 @@
-import pygame
+import pygame, sys
 
 pygame.init()
-game = True
-pygame.display.set_mode((1280, 720)) 
+screen = pygame.display.set_mode((1280, 720))
 
-while game :
+fond = pygame.image.load("image/fond.jpg").convert_alpha()
+fond_rect = fond.get_rect()
+
+while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            game = False
+            sys.exit()
+
+    screen.blit(fond, fond_rect)
+    pygame.display.flip()
 
     
