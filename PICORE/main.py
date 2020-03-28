@@ -1,17 +1,45 @@
-import pygame, sys
+import pygame
+from player import Player
+from game import Game
 
 pygame.init()
+
+#generer la fenetre du jeu
+pygame.display.set_caption("Pycore")
 screen = pygame.display.set_mode((1280, 720))
 
-fond = pygame.image.load("image/fond.jpg").convert_alpha()
-fond_rect = fond.get_rect()
+background = pygame.image.load("image/fond.jpg")
 
-while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
+#on instancie le jeu
+game = Game()
 
-    screen.blit(fond, fond_rect)
+#boucle de jeu
+while game:
+
+    #appliquer l'arriere plan
+    screen.blit(background, (0, 0))
+
+    #appliquer l'image du poulet
+    screen.blit(game.player.image,game.player.rect)
+
+    #verifier si le joueur veut aller à droite ou à gauche
+    if game.pressed.get(pygame.K_RIGHT):
+        game.player.move_right()
+    elif game.pressed.get(pygame.K_LEFT):
+        game.player.move_left()
+
+    #mettre à jour l'écran
     pygame.display.flip()
 
-    
+    #condition de sortie
+    for event in pygame.event.get():
+        # verification de l' evenement quietter
+        if event.type == pygame.QUIT:
+            game = False
+            pygame.quit()
+        #est ce que le joueur appuie sur une touche
+        elif event.type == pygame.KEYDOWN:
+            #quelle touche est utilisée
+            game.pressed[event.key] = True
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
