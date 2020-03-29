@@ -22,6 +22,13 @@ while game:
     #appliquer l'image du poulet
     screen.blit(game.player.image,game.player.rect)
 
+    #recupérer les monstres du jeu
+    for monster in game.all_monster:
+        monster.forward()
+
+    #appliquer les images du groupe de monstre
+    game.all_monster.draw(screen)
+
     #verifier si le joueur veut aller à droite ou à gauche
     if game.pressed.get(pygame.K_RIGHT):
         game.player.move_right()

@@ -1,24 +1,25 @@
 import pygame
 
+
 #creation de la classe poulet
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self,game):
         super().__init__()
+        self.game = game
         self.health = 100
         self.max_health = 100
         self.speed = 5
         self.attack = 10
         self.image = pygame.image.load("image/chicken1.png")
         self.rect = self.image.get_rect()
-        self.rect.y = 4
+        self.rect.y = 15
         self.rect.x= 500
 
     def move_right(self):
-        if self.rect.x < 1130 :
+        #si le joueur n'est pas en collision avec un monstre
+        if not self.game.check_collision(self, self.game.all_monster):
             self.rect.x += self.speed
-        else:
-            self.rect.x += 0
 
 
     def move_left(self):
