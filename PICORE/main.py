@@ -24,7 +24,12 @@ while game:
 
     #recupérer les monstres du jeu
     for monster in game.all_monster:
+        monster.update()
         monster.forward()
+        if monster.rect.x <= 0:
+            monster.orientation = "Right"
+        if monster.rect.x >= 1000:
+            monster.orientation = "Left"
 
     #appliquer les images du groupe de monstre
     game.all_monster.draw(screen)
